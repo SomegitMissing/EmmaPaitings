@@ -7,6 +7,12 @@ var osc: float;
 
 var p_arr: Array[Trajectory] = [];
 
+func mod2(x: int, m: int):
+	var mod = x % m;
+	if mod < 0:
+		mod += m;
+	return mod;
+
 func _ready() -> void:
 	var pi_div_p := (PI / particles) * 2
 
@@ -25,31 +31,18 @@ func _draw() -> void:
 	osc = cos(Engine.get_process_frames()*0.01) + 0.2;
 	for i in particles:
 		var p := p_arr[i];
+		var prev_p := p_arr[mod2(i-1, particles)];
 
-		if i > 0:
-			var prev_p = p_arr[i-1];
-			p.foward();
-			p.steer_towards(prev_p.position, curvature);
-			p.average_color(prev_p);
-		else:
-			var prev_p = p_arr[particles - 1];
-			p.foward()
-			p.steer_towards(prev_p.position, curvature);
-
-
-		if p.mutant:
-			p.step_magnitude = osc;
+		p.foward();
+		p.steer_towards(prev_p.position, curvature);
+		p.average_color(prev_p);
 
 	if randi_range(0, 100) != 1:
 		return;
 
 	var r_i = randi_range(0, particles-1);
 
-	var swap = p_arr[0];
-	p_arr[0] = p_arr[r_i];
-	p_arr[r_i] = swap;
-
-	var p0 := p_arr[0];
-
-	p0.line_color = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1));
-	p0.mutant = true;
+	var co := Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1));
+	for i in 1000:
+		p_arr[mod2(r_i+i, particles)].average_color2(co);
+		await draw

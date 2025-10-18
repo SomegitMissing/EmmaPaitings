@@ -4,7 +4,6 @@ extends Node2D
 var delta_pos: Vector2;
 var direction: float = 0;
 var step_magnitude: float = 3;
-var mutant: bool = false;
 var line_color: Color = Color.WHITE;
 
 func _ready() -> void:
@@ -21,22 +20,28 @@ func average_color(target: Trajectory) -> Color:
 
 	return result;
 
+func average_color2(target: Color) -> Color:
+	var result := Color(
+		(line_color.r + target.r)/2,
+		(line_color.g + target.g)/2,
+		(line_color.b + target.b)/2,
+	);
+
+	line_color = result;
+
+	return result;
+
 func foward():
 	delta_pos.x += cos(direction) * step_magnitude;
 	delta_pos.y += sin(direction) * step_magnitude;
 
-	if visible:
-		get_parent().draw_line(
-			position,
-			delta_pos,
-			line_color,
-			1,
-			true
-		);
-
-	if mutant:
-		get_parent().draw_circle(position, 3, line_color)
-
+	get_parent().draw_line(
+		position,
+		delta_pos,
+		line_color,
+		1,
+		true
+	);
 
 	position = delta_pos;
 
