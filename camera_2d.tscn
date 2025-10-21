@@ -5,3 +5,4 @@
 [node name="Camera2D" type="Camera2D"]
 script = ExtResource("1_u0e42")
 particles = 4000
+diameter = 200.0

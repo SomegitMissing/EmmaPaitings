@@ -2,6 +2,7 @@ class_name Parent
 extends Camera2D
 
 @export var particles: int;
+@export var diameter: float;
 
 var p_arr: Array[Trajectory] = [];
 
@@ -10,8 +11,8 @@ func _ready() -> void:
 
 	for i in particles:
 		var p := Trajectory.new();
-		p.global_position.x = cos(i * pi_div_p)*200.0;
-		p.global_position.y = sin(i * pi_div_p)*200.0;
+		p.global_position.x = cos(i * pi_div_p)*diameter;
+		p.global_position.y = sin(i * pi_div_p)*diameter;
 		p_arr.append(p);
 		add_child(p);
 
