@@ -1,9 +1,7 @@
 class_name Parent
 extends Camera2D
 
-@export var curvature: float;
 @export var particles: int;
-var osc: float;
 
 var p_arr: Array[Trajectory] = [];
 
@@ -22,15 +20,18 @@ func _process(_delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	osc = cos(Engine.get_process_frames()*0.01) + 0.2;
+	var frame_count = Engine.get_process_frames();
 	for i in particles:
-		var p := p_arr[i];
+		var i_pi_div := float(i) / particles * PI;
+		var curvature := 0.7 + cos(i_pi_div + frame_count * 0.1)/5;
+		var osc := cos(i_pi_div + frame_count * 0.01) + 0.2;
 
+		var p := p_arr[i];
 		if i > 0:
 			var prev_p = p_arr[i-1];
 			p.foward();
 			p.steer_towards(prev_p.position, curvature);
-			p.average_color(prev_p);
+			p.average_color(prev_p, 0.95);
 		else:
 			var prev_p = p_arr[particles - 1];
 			p.foward()
@@ -40,7 +41,7 @@ func _draw() -> void:
 		if p.mutant:
 			p.step_magnitude = osc;
 
-	if randi_range(0, 100) != 1:
+	if randi_range(0, 50) != 1:
 		return;
 
 	var r_i = randi_range(0, particles-1);

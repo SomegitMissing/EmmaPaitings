@@ -4,5 +4,4 @@
 
 [node name="Camera2D" type="Camera2D"]
 script = ExtResource("1_u0e42")
-curvature = 0.8
 particles = 4000
