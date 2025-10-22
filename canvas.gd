@@ -11,7 +11,7 @@ func _ready() -> void:
 		get_viewport().get_viewport_rid(),
 		RenderingServer.VIEWPORT_CLEAR_NEVER
 	);
-	var pi_div_p := (PI / particles) * 2;
+	var pi_div_p := TAU / particles;
 
 	for i in particles:
 		var p := Trajectory.new();
