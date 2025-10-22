@@ -38,7 +38,7 @@ func fill(color: Color):
 func _draw() -> void:
 	fill(Color(0, 0, 0, 5.0/255));
 
-	var frame_count = Engine.get_process_frames();
+	var frame_count := Engine.get_process_frames();
 	for i in particles:
 		var i_pi_div := float(i) / particles * PI;
 		var curvature := 0.7 + cos(i_pi_div + frame_count * 0.1)/5;
@@ -46,12 +46,12 @@ func _draw() -> void:
 
 		var p := p_arr[i];
 		if i > 0:
-			var prev_p = p_arr[i-1];
+			var prev_p := p_arr[i-1];
 			p.foward();
 			p.steer_towards(prev_p.position, curvature);
 			p.average_color(prev_p, 0.95);
 		else:
-			var prev_p = p_arr[particles - 1];
+			var prev_p := p_arr[particles - 1];
 			p.foward()
 			p.steer_towards(prev_p.position, curvature);
 
@@ -62,7 +62,7 @@ func _draw() -> void:
 	if randi_range(0, 50) != 1:
 		return;
 
-	var r_i = randi_range(0, particles-1);
+	var r_i := randi_range(0, particles-1);
 
 	var swap = p_arr[0];
 	p_arr[0] = p_arr[r_i];
