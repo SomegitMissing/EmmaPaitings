@@ -30,7 +30,7 @@ func fill(color: Color):
 
 func _draw() -> void:
 	fill(Color(0, 0, 0, 10.0/255));
-	rotate(deg_to_rad(frame_count * 0.00001));
+	rotate(deg_to_rad(frame_count * 0.0003));
 	zoom = Vector2.ONE * (amplitude + 2);
 
 	amplitude = (cos(frame_count * 0.012) + 1)/2;
