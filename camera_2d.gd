@@ -1,4 +1,3 @@
-class_name Parent
 extends Camera2D
 
 @export var particles: int;
@@ -7,7 +6,12 @@ extends Camera2D
 var p_arr: Array[Trajectory] = [];
 
 func _ready() -> void:
-	var pi_div_p := (PI / particles) * 2
+	RenderingServer.viewport_set_clear_mode(
+		get_viewport().get_viewport_rid(),
+		RenderingServer.ViewportClearMode.VIEWPORT_CLEAR_NEVER
+	);
+	var pi_div_p := (PI / particles) * 2;
+	print(limit_left);
 
 	for i in particles:
 		var p := Trajectory.new();
@@ -20,7 +24,20 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	queue_redraw()
 
+func fill(color: Color):
+	var cameraSize := get_viewport_rect().size / zoom;
+
+	draw_rect(Rect2(
+		position.x - cameraSize.x/2,
+		position.y - cameraSize.y/2,
+		cameraSize.x,
+		cameraSize.y,
+	), color);
+
+
 func _draw() -> void:
+	fill(Color(0, 0, 0, 5.0/255));
+
 	var frame_count = Engine.get_process_frames();
 	for i in particles:
 		var i_pi_div := float(i) / particles * PI;
