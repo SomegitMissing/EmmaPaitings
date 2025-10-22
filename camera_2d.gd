@@ -11,7 +11,6 @@ func _ready() -> void:
 		RenderingServer.ViewportClearMode.VIEWPORT_CLEAR_NEVER
 	);
 	var pi_div_p := (PI / particles) * 2;
-	print(limit_left);
 
 	for i in particles:
 		var p := Trajectory.new();
