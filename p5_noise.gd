@@ -15,7 +15,7 @@ static func scaled_cosine(i: float) -> float:
 	return 0.5 * (1.0 - cos(i * PI));
 
 static func noise(x: float, y: float = 0, z: float = 0) -> float:
-	if perlin == null:
+	if perlin.size() == 0:
 		perlin = [];
 		perlin.resize(PERLIN_SIZE);
 		for i in PERLIN_SIZE:
