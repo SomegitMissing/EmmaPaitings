@@ -70,5 +70,5 @@ func _draw() -> void:
 
 	var p0 := p_arr[0];
 
-	p0.line_color = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1));
+	p0.line_color = Color(randf(), randf(), randf());
 	p0.mutant = true;
