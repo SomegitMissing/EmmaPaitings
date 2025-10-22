@@ -1,7 +1,8 @@
+class_name Canvas
 extends Camera2D
 
 @export var particles: int;
-@export var diameter: float;
+@export var radius: float;
 
 var p_arr: Array[Trajectory] = [];
 
@@ -14,8 +15,8 @@ func _ready() -> void:
 
 	for i in particles:
 		var p := Trajectory.new();
-		p.position.x = cos(i * pi_div_p)*diameter;
-		p.position.y = sin(i * pi_div_p)*diameter;
+		p.position.x = cos(i * pi_div_p)*radius;
+		p.position.y = sin(i * pi_div_p)*radius;
 		p_arr.append(p);
 		add_child(p);
 

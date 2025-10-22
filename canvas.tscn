@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7ammashdn5c0"]
+
+[ext_resource type="Script" uid="uid://c47cwkn5p8k64" path="res://canvas.gd" id="1_pfdkn"]
+[ext_resource type="Script" uid="uid://nyaca3xx88di" path="res://circle_reference.gd" id="2_15w7l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0e42"]
+radius = 200.0
+
+[node name="Canvas" type="Camera2D"]
+script = ExtResource("1_pfdkn")
+particles = 4000
+radius = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u0e42")
+script = ExtResource("2_15w7l")
