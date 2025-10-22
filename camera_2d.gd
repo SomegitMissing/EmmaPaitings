@@ -8,7 +8,7 @@ var p_arr: Array[Trajectory] = [];
 func _ready() -> void:
 	RenderingServer.viewport_set_clear_mode(
 		get_viewport().get_viewport_rid(),
-		RenderingServer.ViewportClearMode.VIEWPORT_CLEAR_NEVER
+		RenderingServer.VIEWPORT_CLEAR_NEVER
 	);
 	var pi_div_p := (PI / particles) * 2;
 
