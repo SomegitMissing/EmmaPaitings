@@ -14,8 +14,8 @@ func _ready() -> void:
 
 	for i in particles:
 		var p := Trajectory.new();
-		p.global_position.x = cos(i * pi_div_p)*diameter;
-		p.global_position.y = sin(i * pi_div_p)*diameter;
+		p.position.x = cos(i * pi_div_p)*diameter;
+		p.position.y = sin(i * pi_div_p)*diameter;
 		p_arr.append(p);
 		add_child(p);
 
