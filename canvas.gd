@@ -25,13 +25,13 @@ func _process(_delta: float) -> void:
 	queue_redraw()
 
 func fill(color: Color):
-	var cameraSize := get_viewport_rect().size / zoom;
+	var camera_size := get_viewport_rect().size / zoom;
 
 	draw_rect(Rect2(
-		position.x - cameraSize.x/2,
-		position.y - cameraSize.y/2,
-		cameraSize.x,
-		cameraSize.y,
+		position.x - camera_size.x/2,
+		position.y - camera_size.y/2,
+		camera_size.x,
+		camera_size.y,
 	), color);
 
 
