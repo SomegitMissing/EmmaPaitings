@@ -1,9 +1,7 @@
 class_name Canvas
 extends Camera2D
 
-var camera_size: Vector2;
 var frame_count: int;
-var viewport_size: Vector2;
 
 var amplitude: float = 1;
 
@@ -12,21 +10,23 @@ func _ready() -> void:
 		get_viewport().get_viewport_rid(),
 		RenderingServer.VIEWPORT_CLEAR_NEVER,
 	);
-	viewport_size = get_viewport_rect().size;
+
+func camera_size() -> Vector2:
+	return get_viewport_rect().size / zoom;
 
 func _process(_delta: float) -> void:
-	camera_size = get_viewport_rect().size / zoom;
 	frame_count = Engine.get_process_frames();
 	queue_redraw()
 
 func fill(color: Color):
+	var viewport_size := get_viewport_rect().size;
+
 	draw_rect(Rect2(
 		position.x - viewport_size.x/2,
 		position.y - viewport_size.y/2,
 		viewport_size.x,
 		viewport_size.y,
 	), color);
-
 
 func _draw() -> void:
 	fill(Color(0, 0, 0, 10.0/255));
