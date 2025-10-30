@@ -11,9 +11,6 @@ func _ready() -> void:
 		RenderingServer.VIEWPORT_CLEAR_NEVER,
 	);
 
-func camera_size() -> Vector2:
-	return get_viewport_rect().size / zoom;
-
 func _process(_delta: float) -> void:
 	frame_count = Engine.get_process_frames();
 	queue_redraw()
@@ -22,10 +19,8 @@ func fill(color: Color):
 	var viewport_size := get_viewport_rect().size;
 
 	draw_rect(Rect2(
-		position.x - viewport_size.x/2,
-		position.y - viewport_size.y/2,
-		viewport_size.x,
-		viewport_size.y,
+		position - viewport_size/2,
+		viewport_size,
 	), color);
 
 func _draw() -> void:
