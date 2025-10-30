@@ -10,6 +10,7 @@ func _ready() -> void:
 		get_viewport().get_viewport_rid(),
 		RenderingServer.VIEWPORT_CLEAR_NEVER,
 	);
+	Engine.max_fps = 60;
 
 func _process(_delta: float) -> void:
 	frame_count = Engine.get_process_frames();
