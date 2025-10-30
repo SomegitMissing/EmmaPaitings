@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7ammashdn5c0"]
+[gd_scene load_steps=3 format=3 uid="uid://b7ammashdn5c0"]
 
 [ext_resource type="Script" uid="uid://c47cwkn5p8k64" path="res://canvas.gd" id="1_pfdkn"]
+[ext_resource type="Script" uid="uid://blok5qqonofiy" path="res://billboard.gd" id="2_pfdkn"]
 
-[node name="Canvas" type="Camera2D"]
+[node name="Canvas" type="Camera2D" node_paths=PackedStringArray("billboard")]
 script = ExtResource("1_pfdkn")
+billboard = NodePath("Billboard")
+
+[node name="Billboard" type="Node2D" parent="."]
+script = ExtResource("2_pfdkn")
+metadata/_custom_type_script = "uid://blok5qqonofiy"
