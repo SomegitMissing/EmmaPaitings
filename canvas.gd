@@ -1,7 +1,7 @@
 class_name Canvas
 extends Camera2D
 
-@export var billboard: Billboard;
+@export var firework: Firework;
 
 static var frame_count: int;
 
@@ -30,17 +30,17 @@ func fill(color: Color):
 
 func _draw() -> void:
 	if cos(frame_count*0.1) < -0.999:
-		billboard.f = randf() * 5;
+		firework.f = randf() * 5;
 		var viewport_size := (get_viewport_rect().size / 2) - Vector2.ONE * 100;
 
-		billboard.position = Vector2(
+		firework.position = Vector2(
 			randf_range(-viewport_size.x, viewport_size.x),
 			randf_range(-viewport_size.y, viewport_size.y),
 		);
 
 	fill(Color.from_rgba8(0, 0, 0, 10));
 
-	billboard.rotation = frame_count * 0.001 * cos(frame_count*0.01);
-	billboard.scale = amplitude * Vector2.ONE;
+	firework.rotation = frame_count * 0.001 * cos(frame_count*0.01);
+	firework.scale = amplitude * Vector2.ONE;
 
 	amplitude = 0.5 * cos(frame_count * 0.1) + 1;

@@ -1,4 +1,4 @@
-class_name Billboard
+class_name Firework
 extends Node2D
 
 var f: float = 1;
