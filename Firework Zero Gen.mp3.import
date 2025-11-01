@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c7cspd0rrnbg1"
+path="res://.godot/imported/Firework Zero Gen.mp3-92b8ea1c975e210f784cf4792dc5ee21.mp3str"
+
+[deps]
+
+source_file="res://Firework Zero Gen.mp3"
+dest_files=["res://.godot/imported/Firework Zero Gen.mp3-92b8ea1c975e210f784cf4792dc5ee21.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

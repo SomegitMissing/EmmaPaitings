@@ -27,7 +27,7 @@ project/assembly_name="ElvinPaintings"
 
 [editor]
 
-movie_writer/movie_file="/home/smartinez/Documents/elvinpaintings/movie.avi"
+movie_writer/movie_file="/home/smartinez/Documents/GitHub/EmmaPaitings/movie.avi"
 
 [rendering]
 

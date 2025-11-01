@@ -2,17 +2,27 @@ class_name Canvas
 extends Node2D
 
 static var frame_count: int;
+static var delta: float;
+
+static var exp_audio: AudioStreamMP3;
+static var exp_mini_audio: AudioStreamMP3;
 
 @export var margin: float = 100;
+@export var audio: AudioStreamMP3;
+@export var _exp_audio: AudioStreamMP3;
+@export var _exp_mini_audio: AudioStreamMP3;
 
 func _ready() -> void:
 	RenderingServer.viewport_set_clear_mode(
 		get_viewport().get_viewport_rid(),
 		RenderingServer.VIEWPORT_CLEAR_ONLY_NEXT_FRAME
 	);
+	exp_audio = _exp_audio;
+	exp_mini_audio = _exp_mini_audio;
 
 func _process(_delta: float) -> void:
 	frame_count = Engine.get_process_frames();
+	delta = _delta;
 	queue_redraw()
 
 func fill(color: Color):
@@ -24,16 +34,8 @@ func fill(color: Color):
 	), color);
 
 func _draw() -> void:
-	fill(Color.from_rgba8(0, 0, 0, 10));
+	fill(Color(0, 0, 0, P5Noise.noise(frame_count * 0.1) * 0.1));
 	var viewport_size := get_viewport_rect().size / 2;
-
-	draw_circle(
-		Vector2.ZERO,
-	 	((cos(frame_count * 0.1) + 1)/2) * viewport_size.length(),
-		Color.BLACK,
-		false,
-		4,
-	);
 
 	var rand_pos := Vector2(
 		randf_range(-viewport_size.x + margin, viewport_size.x - margin),
@@ -45,12 +47,23 @@ func _draw() -> void:
 		traject.position = rand_pos;
 		traject.direction = deg_to_rad(270);
 		traject.ttl = randf_range(0.5, 1);
+		traject.near = 1 + randf_range(-2, 1) * 0.5;
 
 		add_child(traject);
 
+		var sound = AudioStreamPlayer.new();
+		sound.stream = audio;
+		sound.volume_db = randf_range(-10, -5);
+		sound.pitch_scale = randf_range(1, 1.5);
+
+		traject.add_child(sound);
+		traject.sound = sound;
+
+		sound.play(traject.ttl);
+
 	var child_count := get_child_count();
 	for child_i in child_count:
-		var node: Node2D = get_child(child_i);
+		var node := get_child(child_i);
 		if not node is Trajectory:
 			continue;
 

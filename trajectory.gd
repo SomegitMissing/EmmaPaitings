@@ -6,11 +6,14 @@ var direction: float = 0;
 var step_magnitude: float = 3;
 var line_color: Color = Color.WHITE;
 var generation: int = 0;
+var near: float = 1;
 
 var parent: Node2D;
 
 var ttl: float;
 var timer: Timer;
+
+var sound: AudioStreamPlayer;
 
 const particle_amount := [30, 5];
 
@@ -20,14 +23,12 @@ func _ready() -> void:
 
 	timer = Timer.new();
 	timer.autostart = false;
-	timer.wait_time = ttl;
 
 	timer.one_shot = true;
 
 	add_child(timer);
 
 	timer.start(ttl);
-
 
 func average_color(target: Trajectory, percentage: float) -> void:
 	line_color = line_color.lerp(target.line_color, percentage);
@@ -40,20 +41,41 @@ func foward():
 		position,
 		delta_pos,
 		line_color,
-		1,
+		(timer.time_left * 10 * (generation + 1)) * near,
 		true
 	);
 
+	if sound != null:
+		sound.pitch_scale = lerp(sound.pitch_scale, 0.00001, Canvas.delta * 0.5);
+		#sound.volume_db = timer.time_left;
+
 	if timer.time_left <= 0:
+		var explo := ExplosionPlayer.new();
+
 		if generation == 0:
 			var onda := Onda.new();
 			onda.position = position;
-			onda.max_radius = 100.0;
+			onda.max_radius = 100.0 * near;
 			parent.add_child(onda);
+
+			explo.stream = Canvas.exp_audio;
+			explo.pitch_scale = randf_range(0.75, 1);
+		else:
+			explo.stream = Canvas.exp_mini_audio;
+			explo.volume_db = -15;
+			explo.pitch_scale = randf_range(0.75, 1.5);
+
+		parent.add_child(explo);
+		explo.play();
 
 		queue_free();
 
 		if generation > 1:
+			parent.draw_circle(
+				position,
+				3,
+				Color.WHITE,
+			);
 			return;
 
 		for _i in particle_amount[generation]:
@@ -61,7 +83,7 @@ func foward():
 			traject.generation = generation + 1;
 
 			if generation == 0:
-				traject.ttl = randf_range(0.2, 0.4);
+				traject.ttl = randf_range(0.2, 0.4) * (near+0.1);
 				traject.line_color = Color.from_hsv(randf()*0.2, 1, 1);
 			elif generation == 1:
 				traject.ttl = randf_range(0.05, 0.1);
