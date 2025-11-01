@@ -45,7 +45,8 @@ func _draw() -> void:
 	if randi_range(0, 60) == 0:
 		var traject := Trajectory.new();
 		traject.position = rand_pos;
-		traject.direction = deg_to_rad(270);
+		traject.org_direction = 270 + randf_range(-20, 20);
+		traject.direction = deg_to_rad(traject.org_direction);
 		traject.ttl = randf_range(0.5, 1);
 		traject.near = 1 + randf_range(-2, 1) * 0.5;
 
@@ -72,45 +73,8 @@ func _draw() -> void:
 		particle.foward();
 		match particle.generation:
 			0:
-				particle.direction = deg_to_rad(270 + cos(Canvas.frame_count * 0.1) * 10);
+				particle.direction = deg_to_rad(particle.org_direction + cos(Canvas.frame_count * 0.1) * 10);
 			1:
 				particle.steer(deg_to_rad(90), 3);
 			2:
 				particle.steer(deg_to_rad(90), 5);
-
-
-	# fill(Color.from_rgba8(0, 0, 0, 5));
-
-	# for i in particles:
-	# 	var i_pi_div := float(i) / particles * PI;
-	# 	var curvature := 0.7 + cos(i_pi_div + frame_count * 0.1)/5;
-	# 	var osc := cos(i_pi_div + frame_count * 0.01) + 0.2;
-
-	# 	var p := particle_arr[i];
-	# 	if i > 0:
-	# 		var prev_p := particle_arr[i-1];
-	# 		p.foward();
-	# 		p.steer_towards(prev_p.position, curvature);
-	# 		p.average_color(prev_p, 0.95);
-	# 	else:
-	# 		var prev_p := particle_arr[particles - 1];
-	# 		p.foward()
-	# 		p.steer_towards(prev_p.position, curvature);
-
-
-	# 	if p.mutant:
-	# 		p.step_magnitude = osc;
-
-	# if randi_range(0, 50) != 1:
-	# 	return;
-
-	# var r_i := randi_range(0, particles-1);
-
-	# var swap = particle_arr[0];
-	# particle_arr[0] = particle_arr[r_i];
-	# particle_arr[r_i] = swap;
-
-	# var p0 := particle_arr[0];
-
-	# p0.line_color = Color(randf(), randf(), randf());
-	# p0.mutant = true;

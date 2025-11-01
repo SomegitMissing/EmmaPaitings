@@ -7,6 +7,7 @@ const step_magnitude: float = 1080 - 200;
 var line_color: Color = Color.WHITE;
 var generation: int = 0;
 var near: float = 1;
+var org_direction: float;
 
 var parent: Node2D;
 
