@@ -4,5 +4,3 @@
 
 [node name="Canvas" type="Camera2D"]
 script = ExtResource("1_pfdkn")
-particles = 4000
-radius = 300.0
