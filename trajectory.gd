@@ -3,7 +3,7 @@ extends Node2D
 
 var delta_pos: Vector2;
 var direction: float = 0;
-const step_magnitude: float = 1080 - 200;
+var step_magnitude: float;
 var line_color: Color = Color.WHITE;
 var generation: int = 0;
 var near: float = 1;
@@ -21,6 +21,8 @@ const particle_amount := [30, 5];
 func _ready() -> void:
 	parent = get_parent();
 	delta_pos = position;
+	var viewport_size = get_viewport_rect().size;
+	step_magnitude = viewport_size.y - viewport_size.y * 0.1;
 
 	timer = Timer.new();
 	timer.autostart = false;

@@ -20,6 +20,8 @@ func _ready() -> void:
 	exp_audio = _exp_audio;
 	exp_mini_audio = _exp_mini_audio;
 
+	position = get_viewport_rect().size / 2;
+
 func _process(_delta: float) -> void:
 	frame_count = Engine.get_process_frames();
 	delta = _delta;
