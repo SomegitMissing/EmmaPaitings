@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://c47cwkn5p8k64" path="res://canvas.gd" id="1_pfdkn"]
 
-[node name="Canvas" type="Camera2D"]
+[node name="Canvas" type="Node2D"]
 script = ExtResource("1_pfdkn")

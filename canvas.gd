@@ -1,5 +1,5 @@
 class_name Canvas
-extends Camera2D
+extends Node2D
 
 static var frame_count: int;
 
@@ -17,7 +17,7 @@ func fill(color: Color):
 	var viewport_size := get_viewport_rect().size;
 
 	draw_rect(Rect2(
-		position - viewport_size/2,
+		Vector2.ZERO - position,
 		viewport_size,
 	), color);
 
