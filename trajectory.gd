@@ -3,7 +3,7 @@ extends Node2D
 
 var delta_pos: Vector2;
 var direction: float = 0;
-var step_magnitude: float = 3;
+var step_magnitude: float = 1080-100;
 var line_color: Color = Color.WHITE;
 var generation: int = 0;
 var near: float = 1;
@@ -34,8 +34,8 @@ func average_color(target: Trajectory, percentage: float) -> void:
 	line_color = line_color.lerp(target.line_color, percentage);
 
 func foward():
-	delta_pos.x += cos(direction) * step_magnitude;
-	delta_pos.y += sin(direction) * step_magnitude;
+	delta_pos.x += cos(direction) * step_magnitude * Canvas.delta;
+	delta_pos.y += sin(direction) * step_magnitude * Canvas.delta;
 
 	parent.draw_line(
 		position,
