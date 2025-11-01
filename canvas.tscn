@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_15w7l"]
 shader = ExtResource("2_pfdkn")
-shader_parameter/lod = 0.1
+shader_parameter/lod = 0.5
 
 [node name="Control" type="Control"]
 layout_mode = 3

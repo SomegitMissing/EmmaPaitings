@@ -24,8 +24,17 @@ func fill(color: Color):
 	), color);
 
 func _draw() -> void:
-	fill(Color.from_rgba8(0, 0, 0, 5));
+	fill(Color.from_rgba8(0, 0, 0, 10));
 	var viewport_size := get_viewport_rect().size / 2;
+
+	draw_circle(
+		Vector2.ZERO,
+	 	((cos(frame_count * 0.1) + 1)/2) * viewport_size.length(),
+		Color.BLACK,
+		false,
+		4,
+	);
+
 	var rand_pos := Vector2(
 		randf_range(-viewport_size.x + margin, viewport_size.x - margin),
 		viewport_size.y,
