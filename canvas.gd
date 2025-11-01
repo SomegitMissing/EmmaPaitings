@@ -1,5 +1,5 @@
 class_name Canvas
-extends Camera2D
+extends Node2D
 
 static var frame_count: int;
 
@@ -8,7 +8,7 @@ static var frame_count: int;
 func _ready() -> void:
 	RenderingServer.viewport_set_clear_mode(
 		get_viewport().get_viewport_rid(),
-		RenderingServer.VIEWPORT_CLEAR_NEVER
+		RenderingServer.VIEWPORT_CLEAR_ONLY_NEXT_FRAME
 	);
 
 func _process(_delta: float) -> void:
@@ -19,12 +19,12 @@ func fill(color: Color):
 	var viewport_size := get_viewport_rect().size;
 
 	draw_rect(Rect2(
-		position - viewport_size/2,
+		Vector2.ZERO - position,
 		viewport_size,
 	), color);
 
 func _draw() -> void:
-	fill(Color.from_rgba8(0, 0, 0, 10));
+	fill(Color.from_rgba8(0, 0, 0, 5));
 	var viewport_size := get_viewport_rect().size / 2;
 	var rand_pos := Vector2(
 		randf_range(-viewport_size.x + margin, viewport_size.x - margin),
@@ -41,7 +41,11 @@ func _draw() -> void:
 
 	var child_count := get_child_count();
 	for child_i in child_count:
-		var particle: Trajectory = get_child(child_i);
+		var node: Node2D = get_child(child_i);
+		if not node is Trajectory:
+			continue;
+
+		var particle: Trajectory = node;
 
 		particle.foward();
 		match particle.generation:

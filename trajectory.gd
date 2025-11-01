@@ -12,7 +12,7 @@ var parent: Node2D;
 var ttl: float;
 var timer: Timer;
 
-const particle_amount := [25, 10];
+const particle_amount := [30, 5];
 
 func _ready() -> void:
 	parent = get_parent();
@@ -45,7 +45,12 @@ func foward():
 	);
 
 	if timer.time_left <= 0:
-		parent.draw_circle(position, 15.0 / (generation + 1), Color.WHITE);
+		if generation == 0:
+			var onda := Onda.new();
+			onda.position = position;
+			onda.max_radius = 100.0;
+			parent.add_child(onda);
+
 		queue_free();
 
 		if generation > 1:
@@ -65,7 +70,7 @@ func foward():
 			traject.direction = deg_to_rad(randf_range(0, 360));
 			traject.position = position;
 
-			get_parent().add_child(traject);
+			parent.add_child(traject);
 
 		return;
 
