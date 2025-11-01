@@ -3,7 +3,7 @@ extends Node2D
 
 var delta_pos: Vector2;
 var direction: float = 0;
-var step_magnitude: float = 1080-100;
+const step_magnitude: float = 1080 - 200;
 var line_color: Color = Color.WHITE;
 var generation: int = 0;
 var near: float = 1;
@@ -47,10 +47,8 @@ func foward():
 
 	if sound != null:
 		sound.pitch_scale = lerp(sound.pitch_scale, 0.00001, Canvas.delta * 0.5);
-		#sound.volume_db = timer.time_left;
 
 	if timer.time_left <= 0:
-		var explo := ExplosionPlayer.new();
 
 		if generation == 0:
 			var onda := Onda.new();
@@ -58,15 +56,19 @@ func foward():
 			onda.max_radius = 100.0 * near;
 			parent.add_child(onda);
 
+			var explo := ExplosionPlayer.new();
 			explo.stream = Canvas.exp_audio;
 			explo.pitch_scale = randf_range(0.75, 1);
-		else:
+			parent.add_child(explo);
+			explo.play();
+
+		elif randi() % 2 == 0:
+			var explo := ExplosionPlayer.new();
 			explo.stream = Canvas.exp_mini_audio;
 			explo.volume_db = -15;
 			explo.pitch_scale = randf_range(0.75, 1.5);
-
-		parent.add_child(explo);
-		explo.play();
+			parent.add_child(explo);
+			explo.play();
 
 		queue_free();
 
@@ -111,6 +113,6 @@ func steer_towards(target: Vector2, steering_magnitude: float):
 
 func steer(angle: float, steering_magnitude: float):
 	direction = atan2(
-		lerp(sin(direction), sin(angle),steering_magnitude),
-		lerp(cos(direction), cos(angle),steering_magnitude)
+		lerp(sin(direction), sin(angle), steering_magnitude * Canvas.delta),
+		lerp(cos(direction), cos(angle), steering_magnitude * Canvas.delta)
 	);

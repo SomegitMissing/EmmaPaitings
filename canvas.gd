@@ -42,7 +42,7 @@ func _draw() -> void:
 		viewport_size.y,
 	);
 
-	if randi_range(0, 70) == 0:
+	if randi_range(0, 60) == 0:
 		var traject := Trajectory.new();
 		traject.position = rand_pos;
 		traject.direction = deg_to_rad(270);
@@ -74,9 +74,9 @@ func _draw() -> void:
 			0:
 				particle.direction = deg_to_rad(270 + cos(Canvas.frame_count * 0.1) * 10);
 			1:
-				particle.steer(deg_to_rad(90), 0.01);
+				particle.steer(deg_to_rad(90), 3);
 			2:
-				particle.steer(deg_to_rad(90), 0.03);
+				particle.steer(deg_to_rad(90), 5);
 
 
 	# fill(Color.from_rgba8(0, 0, 0, 5));
