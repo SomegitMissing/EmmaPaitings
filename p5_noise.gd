@@ -16,9 +16,9 @@ static func scaled_cosine(i: float) -> float:
 
 static func noise(x: float, y: float = 0, z: float = 0) -> float:
 	if perlin.size() == 0:
-		const PERLIN_TRUE_SIZE = PERLIN_SIZE + 1;
-		perlin.resize(PERLIN_TRUE_SIZE);
-		for i in PERLIN_TRUE_SIZE:
+		const TRUE_PERLIN_SIZE = PERLIN_SIZE + 1;
+		perlin.resize(TRUE_PERLIN_SIZE);
+		for i in TRUE_PERLIN_SIZE:
 			perlin[i] = randf();
 
 	x = abs(x);
@@ -77,6 +77,5 @@ static func noise(x: float, y: float = 0, z: float = 0) -> float:
 		if zf >= 1.0:
 			zi += 1;
 			zf -= 1;
-
 
 	return r;
