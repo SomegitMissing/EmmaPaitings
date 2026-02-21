@@ -21,13 +21,13 @@ static func noise(x: float, y: float = 0, z: float = 0) -> float:
 		for i in TRUE_PERLIN_SIZE:
 			perlin[i] = randf();
 
-	x = abs(x);
-	y = abs(y);
-	z = abs(z);
+	x = absf(x);
+	y = absf(y);
+	z = absf(z);
 
-	var xi: int = floor(x);
-	var yi: int = floor(y);
-	var zi: int = floor(z);
+	var xi := floori(x);
+	var yi := floori(y);
+	var zi := floori(z);
 
 	var xf := x - xi;
 	var yf := y - yi;
