@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7ammashdn5c0"]
+[gd_scene format=3 uid="uid://b7ammashdn5c0"]
 
 [ext_resource type="Script" uid="uid://c47cwkn5p8k64" path="res://canvas.gd" id="1_pfdkn"]
 
-[node name="Canvas" type="Node2D"]
+[node name="Canvas" type="Node2D" unique_id=161877222]
 script = ExtResource("1_pfdkn")
