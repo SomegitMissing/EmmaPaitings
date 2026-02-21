@@ -21,7 +21,7 @@ const particle_amount := [30, 5];
 func _ready() -> void:
 	parent = get_parent();
 	delta_pos = position;
-	var viewport_size = get_viewport_rect().size;
+	var viewport_size := get_viewport_rect().size;
 	step_magnitude = viewport_size.y - viewport_size.y * 0.1;
 
 	timer = Timer.new();
@@ -36,7 +36,7 @@ func _ready() -> void:
 func average_color(target: Trajectory, percentage: float) -> void:
 	line_color = line_color.lerp(target.line_color, percentage);
 
-func foward():
+func foward() -> void:
 	delta_pos.x += cos(direction) * step_magnitude * Canvas.delta;
 	delta_pos.y += sin(direction) * step_magnitude * Canvas.delta;
 
@@ -83,7 +83,7 @@ func foward():
 			);
 			return;
 
-		for _i in particle_amount[generation]:
+		for _i: int in particle_amount[generation]:
 			var traject := Trajectory.new();
 			traject.generation = generation + 1;
 
@@ -103,19 +103,19 @@ func foward():
 
 	position = delta_pos;
 
-func steer_towards(target: Vector2, steering_magnitude: float):
+func steer_towards(target: Vector2, steering_magnitude: float) -> void:
 	var target_dir := atan2(
 		target.y - position.y,
 		target.x - position.x,
 	);
 
 	direction = atan2(
-		lerp(sin(direction), sin(target_dir), steering_magnitude),
-		lerp(cos(direction), cos(target_dir), steering_magnitude),
+		lerpf(sin(direction), sin(target_dir), steering_magnitude),
+		lerpf(cos(direction), cos(target_dir), steering_magnitude),
 	);
 
-func steer(angle: float, steering_magnitude: float):
+func steer(angle: float, steering_magnitude: float) -> void:
 	direction = atan2(
-		lerp(sin(direction), sin(angle), steering_magnitude * Canvas.delta),
-		lerp(cos(direction), cos(angle), steering_magnitude * Canvas.delta)
+		lerpf(sin(direction), sin(angle), steering_magnitude * Canvas.delta),
+		lerpf(cos(direction), cos(angle), steering_magnitude * Canvas.delta)
 	);

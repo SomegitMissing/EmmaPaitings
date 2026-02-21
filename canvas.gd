@@ -54,7 +54,7 @@ func _draw() -> void:
 
 		add_child(traject);
 
-		var sound = AudioStreamPlayer.new();
+		var sound := AudioStreamPlayer.new();
 		sound.stream = audio;
 		sound.volume_db = randf_range(-10, -5);
 		sound.pitch_scale = randf_range(1, 1.5);
