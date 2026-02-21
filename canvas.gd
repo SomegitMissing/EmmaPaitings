@@ -13,7 +13,7 @@ func _process(_delta: float) -> void:
 	frame_count = Engine.get_process_frames();
 	queue_redraw()
 
-func fill(color: Color):
+func fill(color: Color) -> void:
 	var viewport_size := get_viewport_rect().size;
 
 	draw_rect(Rect2(
