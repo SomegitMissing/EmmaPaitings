@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7ammashdn5c0"]
+[gd_scene format=3 uid="uid://b7ammashdn5c0"]
 
 [ext_resource type="Script" uid="uid://c47cwkn5p8k64" path="res://canvas.gd" id="1_pfdkn"]
-[ext_resource type="Shader" uid="uid://bfilmdajv57ml" path="res://blur.gdshader" id="2_pfdkn"]
+[ext_resource type="Shader" path="res://blur.gdshader" id="2_pfdkn"]
 [ext_resource type="AudioStream" uid="uid://c7cspd0rrnbg1" path="res://Firework Zero Gen.mp3" id="3_15w7l"]
 [ext_resource type="AudioStream" uid="uid://bwg1t6pf71bc1" path="res://Explosion.mp3" id="3_rjejc"]
 [ext_resource type="AudioStream" uid="uid://b3j5xbxukswpi" path="res://Mini Explosion.mp3" id="4_uoc13"]
@@ -10,7 +10,7 @@
 shader = ExtResource("2_pfdkn")
 shader_parameter/lod = 0.5
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1701072596]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,14 +18,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Canvas" type="Node2D" parent="."]
+[node name="Canvas" type="Node2D" parent="." unique_id=161877222]
 position = Vector2(960, 540)
 script = ExtResource("1_pfdkn")
 audio = ExtResource("3_15w7l")
 _exp_audio = ExtResource("3_rjejc")
 _exp_mini_audio = ExtResource("4_uoc13")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2005392079]
 material = SubResource("ShaderMaterial_15w7l")
 layout_mode = 1
 anchors_preset = 15
