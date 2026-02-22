@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c47cwkn5p8k64" path="res://canvas.gd" id="1_pfdkn"]
 [ext_resource type="Shader" path="res://blur.gdshader" id="2_pfdkn"]
-[ext_resource type="AudioStream" uid="uid://c7cspd0rrnbg1" path="res://Firework Zero Gen.mp3" id="3_15w7l"]
-[ext_resource type="AudioStream" uid="uid://bwg1t6pf71bc1" path="res://Explosion.mp3" id="3_rjejc"]
-[ext_resource type="AudioStream" uid="uid://b3j5xbxukswpi" path="res://Mini Explosion.mp3" id="4_uoc13"]
+[ext_resource type="AudioStream" uid="uid://c7cspd0rrnbg1" path="res://audio/Firework Zero Gen.mp3" id="3_15w7l"]
+[ext_resource type="AudioStream" uid="uid://bwg1t6pf71bc1" path="res://audio/Explosion.mp3" id="3_rjejc"]
+[ext_resource type="AudioStream" uid="uid://b3j5xbxukswpi" path="res://audio/Mini Explosion.mp3" id="4_uoc13"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_15w7l"]
 shader = ExtResource("2_pfdkn")

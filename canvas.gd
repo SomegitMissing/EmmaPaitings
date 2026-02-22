@@ -1,16 +1,20 @@
 class_name Canvas
 extends Node2D
 
+
 static var frame_count: int;
 static var delta: float;
 
+
 static var exp_audio: AudioStreamMP3;
 static var exp_mini_audio: AudioStreamMP3;
+
 
 @export var margin: float = 100;
 @export var audio: AudioStreamMP3;
 @export var _exp_audio: AudioStreamMP3;
 @export var _exp_mini_audio: AudioStreamMP3;
+
 
 func _ready() -> void:
 	RenderingServer.viewport_set_clear_mode(
@@ -22,18 +26,12 @@ func _ready() -> void:
 
 	position = get_viewport_rect().size / 2;
 
+
 func _process(_delta: float) -> void:
 	frame_count = Engine.get_process_frames();
 	delta = _delta;
 	queue_redraw()
 
-func fill(color: Color) -> void:
-	var viewport_size := get_viewport_rect().size;
-
-	draw_rect(Rect2(
-		Vector2.ZERO - position,
-		viewport_size,
-	), color);
 
 func _draw() -> void:
 	fill(Color(0, 0, 0, P5Noise.noise(frame_count * 0.1) * 0.1));
@@ -80,3 +78,12 @@ func _draw() -> void:
 				particle.steer(deg_to_rad(90), 3);
 			2:
 				particle.steer(deg_to_rad(90), 5);
+
+
+func fill(color: Color) -> void:
+	var viewport_size := get_viewport_rect().size;
+
+	draw_rect(Rect2(
+		Vector2.ZERO - position,
+		viewport_size,
+	), color);
