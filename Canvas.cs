@@ -83,7 +83,7 @@ public partial class Canvas : Node2D
 		), color);
 	}
 
-	public static List<string> RotateArray(List<string> arr, int steps)
+	public static List<T> RotateArray<T>(List<T> arr, int steps)
 	{
 		int n = arr.Count;
 		int s = ((steps % n) + n) % n;
@@ -101,9 +101,9 @@ public partial class Canvas : Node2D
 
 		int decimalIndex = intPart.Length;
 
-		List<string> digits = [.. (intPart + fracPart).Select(c => c.ToString())];
+		List<char> digits = [.. (intPart + fracPart).ToCharArray()];
 
-		List<string> rotated;
+		List<char> rotated;
 
 		if (steps < 0)
 		{
