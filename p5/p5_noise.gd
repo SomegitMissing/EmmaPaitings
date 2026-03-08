@@ -95,3 +95,5 @@ static func noise_seed(val: int) -> void:
 
 	for i in TRUE_PERLIN_SIZE:
 		perlin[i] = lgc.rand();
+
+	lgc.free();
