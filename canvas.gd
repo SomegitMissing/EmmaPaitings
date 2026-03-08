@@ -1,7 +1,9 @@
 class_name Canvas
 extends Node2D
 
+
 static var frame_count: int;
+
 
 func _ready() -> void:
 	RenderingServer.viewport_set_clear_mode(
@@ -9,9 +11,11 @@ func _ready() -> void:
 		RenderingServer.VIEWPORT_CLEAR_NEVER,
 	);
 
+
 func _process(_delta: float) -> void:
 	frame_count = Engine.get_process_frames();
 	queue_redraw()
+
 
 func fill(color: Color) -> void:
 	var viewport_size := get_viewport_rect().size;
@@ -20,6 +24,7 @@ func fill(color: Color) -> void:
 		Vector2.ZERO - position,
 		viewport_size,
 	), color);
+
 
 func _draw() -> void:
 	pass
