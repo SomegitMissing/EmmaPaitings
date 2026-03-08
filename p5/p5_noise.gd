@@ -1,22 +1,27 @@
 class_name P5Noise
 extends Object
 
+
 const PERLIN_YWRAPB = 4;
 const PERLIN_YWRAP = 1 << PERLIN_YWRAPB;
 const PERLIN_ZWRAPB = 8;
 const PERLIN_ZWRAP = 1 << PERLIN_ZWRAPB;
+
 const PERLIN_SIZE = 4095;
+const TRUE_PERLIN_SIZE = PERLIN_SIZE + 1;
+
 
 static var perlin: Array[float];
 static var perlin_octaves := 4;
 static var perlin_amp_falloff := 0.5;
 
+
 static func scaled_cosine(i: float) -> float:
 	return 0.5 * (1.0 - cos(i * PI));
 
+
 static func noise(x: float, y: float = 0, z: float = 0) -> float:
 	if perlin.size() == 0:
-		const TRUE_PERLIN_SIZE = PERLIN_SIZE + 1;
 		perlin.resize(TRUE_PERLIN_SIZE);
 		for i in TRUE_PERLIN_SIZE:
 			perlin[i] = randf();
@@ -79,3 +84,14 @@ static func noise(x: float, y: float = 0, z: float = 0) -> float:
 			zf -= 1;
 
 	return r;
+
+
+static func noise_seed(val: int) -> void:
+	var lgc: LGC = LGC.new();
+	lgc.set_seed(val);
+
+	perlin = [];
+	perlin.resize(TRUE_PERLIN_SIZE);
+
+	for i in TRUE_PERLIN_SIZE:
+		perlin[i] = lgc.rand();
